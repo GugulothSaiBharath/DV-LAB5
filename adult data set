@@ -1,0 +1,40 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load the adult dataset
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data'
+cols = ['age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status', 'occupation',
+        'relationship', 'race', 'sex', 'capital-gain', 'capital-loss', 'hours-per-week', 'native-country', 'income']
+df = pd.read_csv(url, header=None, names=cols)
+
+# Check the first few rows of the dataset
+print(df.head())
+
+# Check the summary statistics of numerical variables
+print(df.describe())
+
+# Check the distribution of income
+sns.countplot(x='income', data=df)
+plt.title('Distribution of Income')
+plt.show()
+
+# Check the distribution of education
+sns.countplot(y='education', data=df)
+plt.title('Distribution of Education')
+plt.show()
+
+# Check the distribution of age by income
+sns.boxplot(x='income', y='age', data=df)
+plt.title('Distribution of Age by Income')
+plt.show()
+
+# Check the relationship between education and income
+sns.catplot(x='income', y='education-num', kind='boxen', data=df)
+plt.title('Relationship between Education and Income')
+plt.show()
+
+# Check the relationship between occupation and income
+sns.catplot(y='occupation', x='income', kind='bar', data=df)
+plt.title('Relationship between Occupation and Income')
+plt.show()
